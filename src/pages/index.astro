@@ -48,6 +48,18 @@ const manifestoHref = '#manifesto';
 				color: #020617;
 			}
 
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border-width: 0;
+			}
+
 			.hero-shell {
 				position: relative;
 				display: flex;
@@ -189,6 +201,134 @@ const manifestoHref = '#manifesto';
 					0 0 20px rgba(37, 99, 235, 0.4);
 			}
 
+			.terrain-shell {
+				position: relative;
+				padding: 5rem 1.5rem;
+				background:
+					radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08), transparent 42%),
+					linear-gradient(180deg, #020617 0%, #0f172a 100%);
+			}
+
+			.terrain-copy {
+				margin: 0 auto;
+				max-width: 48rem;
+				font-size: clamp(1.25rem, 3vw, 1.65rem);
+				line-height: 1.85;
+				text-align: center;
+				text-wrap: balance;
+				color: #cbd5e1;
+			}
+
+			.terrain-emphasis {
+				font-weight: 700;
+				color: #ffffff;
+			}
+
+			.protocol-shell {
+				position: relative;
+				padding: 4rem 0 5rem;
+				background: #020617;
+			}
+
+			.protocol-header {
+				margin: 0 auto 2.5rem;
+				max-width: 42rem;
+				padding: 0 1.5rem;
+				text-align: center;
+			}
+
+			.protocol-kicker {
+				margin: 0;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.24em;
+				text-transform: uppercase;
+				color: #60a5fa;
+			}
+
+			.protocol-title {
+				margin: 1rem 0 0;
+				font-size: clamp(1.9rem, 4vw, 3rem);
+				font-weight: 800;
+				line-height: 1.1;
+				letter-spacing: -0.03em;
+				color: #f8fafc;
+				text-wrap: balance;
+			}
+
+			.protocol-intro {
+				margin: 1rem 0 0;
+				font-size: 1rem;
+				line-height: 1.75;
+				color: #94a3b8;
+			}
+
+			.protocol-grid-layout {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr);
+				gap: 1.5rem;
+			}
+
+			.protocol-card {
+				position: relative;
+				overflow: hidden;
+				border: 1px solid rgba(30, 41, 59, 1);
+				border-radius: 1rem;
+				background: rgba(2, 6, 23, 0.5);
+				padding: 2rem;
+				box-shadow: 0 20px 50px rgba(2, 6, 23, 0.18);
+				backdrop-filter: blur(12px);
+				transition:
+					transform 0.3s ease,
+					border-color 0.3s ease,
+					box-shadow 0.3s ease,
+					background-color 0.3s ease;
+			}
+
+			.protocol-card::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent 58%);
+				opacity: 0;
+				transition: opacity 0.3s ease;
+				pointer-events: none;
+			}
+
+			.protocol-card:hover {
+				transform: translateY(-0.5rem);
+				border-color: rgba(59, 130, 246, 0.5);
+				box-shadow:
+					0 24px 60px rgba(2, 6, 23, 0.3),
+					0 20px 50px rgba(30, 58, 138, 0.2);
+			}
+
+			.protocol-card:hover::before {
+				opacity: 1;
+			}
+
+			.protocol-card:focus-within {
+				border-color: rgba(96, 165, 250, 0.65);
+				box-shadow:
+					0 0 0 4px rgba(96, 165, 250, 0.15),
+					0 24px 60px rgba(2, 6, 23, 0.3);
+			}
+
+			.protocol-card-title {
+				margin: 0 0 1rem;
+				font-size: 1.25rem;
+				font-weight: 700;
+				line-height: 1.35;
+				color: #f1f5f9;
+			}
+
+			.protocol-card-copy {
+				margin: 0;
+				font-size: 1rem;
+				line-height: 1.75;
+				color: #94a3b8;
+			}
+
 			.support-shell {
 				position: relative;
 				border-top: 1px solid rgba(30, 41, 59, 0.8);
@@ -307,6 +447,20 @@ const manifestoHref = '#manifesto';
 					font-size: 1.05rem;
 				}
 
+				.terrain-shell {
+					padding-top: 8rem;
+					padding-bottom: 8rem;
+				}
+
+				.protocol-shell {
+					padding-top: 4rem;
+					padding-bottom: 6rem;
+				}
+
+				.protocol-grid-layout {
+					grid-template-columns: repeat(3, minmax(0, 1fr));
+				}
+
 				.support-shell {
 					padding: 6.5rem 2.5rem 7rem;
 				}
@@ -328,6 +482,11 @@ const manifestoHref = '#manifesto';
 				.support-shell {
 					padding-inline: 4rem;
 				}
+
+				.terrain-shell,
+				.protocol-header {
+					padding-inline: 4rem;
+				}
 			}
 
 			@media (prefers-reduced-motion: reduce) {
@@ -340,6 +499,14 @@ const manifestoHref = '#manifesto';
 				}
 
 				.cta-primary:hover {
+					transform: none;
+				}
+
+				.protocol-card {
+					transition: none;
+				}
+
+				.protocol-card:hover {
 					transform: none;
 				}
 			}
@@ -383,6 +550,81 @@ const manifestoHref = '#manifesto';
 						</a>
 					</div>
 				</header>
+			</section>
+
+			<section
+				class="terrain-shell bg-gradient-to-b from-slate-950 to-slate-900 py-20 md:py-32"
+				aria-labelledby="terrain-title"
+			>
+				<h2 id="terrain-title" class="sr-only">
+					O Reconhecimento do Terreno
+				</h2>
+				<div class="mx-auto max-w-5xl px-6 text-center">
+					<p
+						class="terrain-copy max-w-3xl mx-auto text-xl leading-relaxed text-slate-300 md:text-2xl"
+					>
+						O professor entrega uma teoria de excelência. Mas quem organiza os nossos eventos
+						de treinamento prático? Quem fecha parcerias com o mercado de tecnologia? Quem
+						estrutura os eventos que colocam o nosso curso no mapa?
+						<span class="terrain-emphasis text-white font-bold"> A inércia acabou.</span>
+					</p>
+				</div>
+			</section>
+
+			<section
+				class="protocol-shell py-16"
+				aria-labelledby="protocol-title"
+			>
+				<div class="protocol-header">
+					<p class="protocol-kicker text-blue-400">O Protocolo Apolo</p>
+					<h2 id="protocol-title" class="protocol-title">
+						Propostas objetivas para transformar energia estudantil em estrutura real.
+					</h2>
+					<p class="protocol-intro">
+						Da preparação competitiva ao contato com o mercado, a missão é criar mecanismos
+						contínuos de evolução para o curso.
+					</p>
+				</div>
+
+				<div class="max-w-7xl mx-auto px-6">
+					<div class="protocol-grid-layout grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+						<article
+							class="protocol-card rounded-2xl border border-slate-800 bg-slate-950/50 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20"
+						>
+							<h3 class="protocol-card-title mb-4 text-xl font-bold text-slate-100">
+								💻 Competições e Treinamentos
+							</h3>
+							<p class="protocol-card-copy text-slate-400 leading-relaxed">
+								Rede de apoio tática e estruturação de ligas de treinamento para a Maratona
+								SBC e competições de tecnologia.
+							</p>
+						</article>
+
+						<article
+							class="protocol-card rounded-2xl border border-slate-800 bg-slate-950/50 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20"
+						>
+							<h3 class="protocol-card-title mb-4 text-xl font-bold text-slate-100">
+								🔬 Pesquisa e Mercado
+							</h3>
+							<p class="protocol-card-copy text-slate-400 leading-relaxed">
+								Conectando a base teórica a projetos práticos, organizando eventos de conexão
+								com empresas e laboratórios.
+							</p>
+						</article>
+
+						<article
+							class="protocol-card rounded-2xl border border-slate-800 bg-slate-950/50 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-900/20"
+						>
+							<h3 class="protocol-card-title mb-4 text-xl font-bold text-slate-100">
+								🛠️ Infra e Sobrevivência
+							</h3>
+							<p class="protocol-card-copy text-slate-400 leading-relaxed">
+								Protocolos de monitoria voluntária e mapeamento técnico contínuo para suporte
+								aos coordenadores.
+							</p>
+						</article>
+					</div>
+				</div>
 			</section>
 
 			<section
