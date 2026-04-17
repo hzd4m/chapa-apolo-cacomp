@@ -1,0 +1,453 @@
+---
+const manifestoHref = '#manifesto';
+---
+
+<html lang="pt-BR" class="bg-slate-950">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="generator" content={Astro.generator} />
+		<meta
+			name="description"
+			content="Chapa Apolo: a missão de fundar o CACOMP começou. Um novo salto para a Computação do Piauí."
+		/>
+		<meta name="theme-color" content="#020617" />
+		<title>Chapa Apolo | Lançamento CACOMP</title>
+
+		<style is:global>
+			:root {
+				color-scheme: dark;
+				background-color: #020617;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html {
+				background: #020617;
+				scroll-behavior: smooth;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				background: #020617;
+				color: #e2e8f0;
+				font-family:
+					Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+					sans-serif;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+			}
+
+			::selection {
+				background: #3b82f6;
+				color: #020617;
+			}
+
+			.hero-shell {
+				position: relative;
+				display: flex;
+				min-height: 100vh;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				padding: 1.5rem;
+				text-align: center;
+			}
+
+			.hero-bg {
+				position: absolute;
+				inset: 0;
+				background:
+					radial-gradient(circle at 50% 18%, rgba(59, 130, 246, 0.16), transparent 34%),
+					radial-gradient(circle at 50% 115%, rgba(14, 165, 233, 0.1), transparent 28%),
+					linear-gradient(180deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 1) 100%);
+			}
+
+			.hero-glow {
+				position: absolute;
+				border-radius: 9999px;
+				filter: blur(72px);
+				opacity: 0.6;
+				pointer-events: none;
+			}
+
+			.hero-glow--top {
+				top: 10%;
+				left: 50%;
+				width: 14rem;
+				height: 14rem;
+				transform: translateX(-50%);
+				background: rgba(37, 99, 235, 0.24);
+			}
+
+			.hero-glow--bottom {
+				right: -4rem;
+				bottom: 3rem;
+				width: 12rem;
+				height: 12rem;
+				background: rgba(56, 189, 248, 0.12);
+			}
+
+			.hero-grid {
+				position: relative;
+				z-index: 1;
+				width: min(100%, 74rem);
+				margin-inline: auto;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.eyebrow {
+				margin: 0 0 1.5rem;
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				border: 1px solid rgba(59, 130, 246, 0.2);
+				border-radius: 9999px;
+				background: rgba(15, 23, 42, 0.7);
+				padding: 0.72rem 1rem;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.28em;
+				text-transform: uppercase;
+				color: #60a5fa;
+				backdrop-filter: blur(18px);
+			}
+
+			.hero-title {
+				margin: 0;
+				max-width: 16ch;
+				font-size: clamp(2.5rem, 8vw, 5rem);
+				font-weight: 800;
+				line-height: 1.04;
+				letter-spacing: -0.04em;
+				text-wrap: balance;
+				background: linear-gradient(135deg, #ffffff 0%, #dbeafe 48%, #60a5fa 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+			.hero-subtitle {
+				margin: 1.5rem auto 0;
+				max-width: 40rem;
+				font-size: clamp(1.125rem, 3vw, 1.375rem);
+				line-height: 1.7;
+				color: #94a3b8;
+				text-wrap: balance;
+			}
+
+			.cta-wrap {
+				margin-top: 2.5rem;
+				display: flex;
+				justify-content: center;
+			}
+
+			.cta-primary {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.75rem;
+				border: 1px solid rgba(96, 165, 250, 0.24);
+				border-radius: 1.25rem;
+				background: #2563eb;
+				padding: 1.125rem 1.75rem;
+				font-size: 1rem;
+				font-weight: 700;
+				line-height: 1.2;
+				color: #ffffff;
+				text-decoration: none;
+				box-shadow:
+					0 18px 45px rgba(15, 23, 42, 0.45),
+					0 0 0 rgba(37, 99, 235, 0);
+				transition:
+					transform 0.3s ease,
+					background-color 0.3s ease,
+					box-shadow 0.3s ease,
+					border-color 0.3s ease;
+			}
+
+			.cta-primary:hover {
+				background: #3b82f6;
+				transform: scale(1.05);
+				box-shadow:
+					0 0 20px rgba(37, 99, 235, 0.4),
+					0 22px 55px rgba(15, 23, 42, 0.45);
+			}
+
+			.cta-primary:focus-visible {
+				outline: none;
+				box-shadow:
+					0 0 0 4px rgba(96, 165, 250, 0.52),
+					0 0 0 8px rgba(2, 6, 23, 1),
+					0 0 20px rgba(37, 99, 235, 0.4);
+			}
+
+			.support-shell {
+				position: relative;
+				border-top: 1px solid rgba(30, 41, 59, 0.8);
+				padding: 5rem 1.5rem 6rem;
+				background: #020617;
+			}
+
+			.support-grid {
+				width: min(100%, 74rem);
+				margin-inline: auto;
+				display: grid;
+				gap: 1.5rem;
+			}
+
+			.manifesto-card,
+			.pillar-panel {
+				border: 1px solid rgba(51, 65, 85, 0.9);
+				border-radius: 1.75rem;
+				background: rgba(15, 23, 42, 0.72);
+				padding: 1.75rem;
+				box-shadow: 0 30px 80px rgba(2, 6, 23, 0.35);
+				backdrop-filter: blur(18px);
+			}
+
+			.manifesto-label,
+			.pillar-label {
+				margin: 0;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.24em;
+				text-transform: uppercase;
+				color: #60a5fa;
+			}
+
+			.manifesto-title,
+			.pillar-title {
+				margin: 1rem 0 0;
+				font-size: clamp(1.75rem, 5vw, 2.4rem);
+				font-weight: 800;
+				line-height: 1.15;
+				letter-spacing: -0.03em;
+				color: #ffffff;
+				text-wrap: balance;
+			}
+
+			.manifesto-copy {
+				margin: 1rem 0 0;
+				font-size: 1rem;
+				line-height: 1.8;
+				color: #cbd5e1;
+			}
+
+			.pillar-list {
+				margin: 1.5rem 0 0;
+				padding: 0;
+				list-style: none;
+				display: grid;
+				gap: 0.9rem;
+			}
+
+			.pillar-item {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 0.85rem;
+				align-items: start;
+				border: 1px solid rgba(51, 65, 85, 0.85);
+				border-radius: 1.1rem;
+				background: rgba(2, 6, 23, 0.5);
+				padding: 1rem;
+			}
+
+			.pillar-badge {
+				display: inline-flex;
+				width: 2rem;
+				height: 2rem;
+				align-items: center;
+				justify-content: center;
+				border-radius: 9999px;
+				background: rgba(37, 99, 235, 0.18);
+				font-size: 0.95rem;
+				font-weight: 800;
+				color: #60a5fa;
+			}
+
+			.pillar-item strong {
+				display: block;
+				margin-bottom: 0.2rem;
+				color: #f8fafc;
+				font-size: 1rem;
+			}
+
+			.pillar-item span {
+				color: #94a3b8;
+				line-height: 1.6;
+			}
+
+			@media (min-width: 768px) {
+				.hero-shell {
+					padding: 2.5rem;
+				}
+
+				.hero-glow--top {
+					width: 18rem;
+					height: 18rem;
+				}
+
+				.hero-glow--bottom {
+					right: 6%;
+					bottom: 6%;
+					width: 14rem;
+					height: 14rem;
+				}
+
+				.cta-primary {
+					padding: 1.25rem 2.5rem;
+					font-size: 1.05rem;
+				}
+
+				.support-shell {
+					padding: 6.5rem 2.5rem 7rem;
+				}
+
+				.support-grid {
+					grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+					align-items: start;
+					gap: 2rem;
+				}
+
+				.manifesto-card,
+				.pillar-panel {
+					padding: 2.25rem;
+				}
+			}
+
+			@media (min-width: 1200px) {
+				.hero-shell,
+				.support-shell {
+					padding-inline: 4rem;
+				}
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+
+				.cta-primary {
+					transition: none;
+				}
+
+				.cta-primary:hover {
+					transform: none;
+				}
+			}
+		</style>
+	</head>
+	<body class="bg-slate-950 font-sans text-slate-100 antialiased">
+		<main class="relative overflow-hidden bg-slate-950">
+			<section
+				class="hero-shell min-h-screen flex flex-col items-center justify-center text-center p-6"
+				aria-labelledby="hero-title"
+			>
+				<div class="hero-bg absolute inset-0" aria-hidden="true"></div>
+				<div class="hero-glow hero-glow--top" aria-hidden="true"></div>
+				<div class="hero-glow hero-glow--bottom" aria-hidden="true"></div>
+
+				<header class="hero-grid relative z-10 mx-auto flex max-w-4xl flex-col items-center">
+					<p
+						class="eyebrow inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-slate-900/70 px-4 py-2 text-sm font-semibold uppercase tracking-[0.28em] text-blue-400 backdrop-blur"
+					>
+						Chapa Apolo <span aria-hidden="true">•</span> Lançamento CACOMP
+					</p>
+
+					<h1
+						id="hero-title"
+						class="hero-title text-4xl font-extrabold tracking-tight text-transparent md:text-6xl lg:text-7xl"
+					>
+						Um pequeno passo para nós, um grande salto para a Computação do Piauí.
+					</h1>
+
+					<h2 class="hero-subtitle mt-6 max-w-2xl text-lg text-slate-400 md:text-xl">
+						A missão de fundar o CACOMP começou. O código está aberto.
+					</h2>
+
+					<div class="cta-wrap mt-10">
+						<a
+							href={manifestoHref}
+							class="cta-primary inline-flex items-center justify-center rounded-2xl bg-blue-600 px-8 py-4 text-base font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-blue-500 hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400/60 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-950"
+						>
+							<span>Ler o Manifesto Oficial</span>
+							<span aria-hidden="true">📄</span>
+						</a>
+					</div>
+				</header>
+			</section>
+
+			<section
+				id="manifesto"
+				class="support-shell border-t border-slate-800/80 px-6 py-20"
+				aria-labelledby="manifesto-title"
+			>
+				<div class="support-grid mx-auto max-w-5xl gap-8">
+					<article class="manifesto-card rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
+						<p class="manifesto-label text-blue-400">Manifesto Oficial</p>
+						<h3 id="manifesto-title" class="manifesto-title text-2xl font-extrabold text-white">
+							A Computação do Piauí merece representação, comunidade e futuro.
+						</h3>
+						<p class="manifesto-copy text-slate-300">
+							A Chapa Apolo nasce para fundar o CACOMP com organização, presença institucional
+							e abertura real para quem quer construir junto.
+						</p>
+						<p class="manifesto-copy text-slate-300">
+							Nossa proposta é transformar vontade coletiva em ação concreta: defender pautas,
+							conectar estudantes e abrir espaço para uma cultura acadêmica mais forte, técnica
+							e participativa.
+						</p>
+					</article>
+
+					<aside class="pillar-panel rounded-3xl border border-slate-800 bg-slate-900/60 p-8">
+						<p class="pillar-label text-blue-400">Três compromissos</p>
+						<h3 class="pillar-title text-2xl font-extrabold text-white">
+							O primeiro lançamento já tem rota definida.
+						</h3>
+
+						<ul class="pillar-list">
+							<li class="pillar-item">
+								<div class="pillar-badge" aria-hidden="true">1</div>
+								<div>
+									<strong>Representar de verdade</strong>
+									<span>
+										Construir um centro acadêmico presente nas decisões que afetam o curso e os
+										estudantes.
+									</span>
+								</div>
+							</li>
+							<li class="pillar-item">
+								<div class="pillar-badge" aria-hidden="true">2</div>
+								<div>
+									<strong>Conectar a comunidade</strong>
+									<span>
+										Aproximar calouros, veteranos, egressos e oportunidades em uma rede ativa de
+										colaboração.
+									</span>
+								</div>
+							</li>
+							<li class="pillar-item">
+								<div class="pillar-badge" aria-hidden="true">3</div>
+								<div>
+									<strong>Executar com transparência</strong>
+									<span>
+										Abrir o processo, publicar prioridades e criar uma cultura de participação
+										contínua.
+									</span>
+								</div>
+							</li>
+						</ul>
+					</aside>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
